@@ -1,1 +1,62 @@
-<p>hello</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #89f7fe, #66a6ff);
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #66a6ff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #4d8de0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Welcome to a Random Page 🌐</h1>
+        <p id="text">Click the button to see something random!</p>
+        <button onclick="randomText()">Surprise Me</button>
+    </div>
+
+    <script>
+        const messages = [
+            "You found a hidden internet corner.",
+            "Bananas are technically berries.",
+            "This page has no real purpose.",
+            "You're doing great today.",
+            "Somewhere, a cat is judging you.",
+            "404 meaning not found... but you're here.",
+            "Randomness achieved successfully."
+        ];
+
+        function randomText() {
+            const randomIndex = Math.floor(Math.random() * messages.length);
+            document.getElementById("text").innerText = messages[randomIndex];
+        }
+    </script>
+
+</body>
+</html>
