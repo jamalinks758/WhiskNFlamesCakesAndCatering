@@ -26,24 +26,30 @@
   <style>
     /* ===================== CSS VARIABLES ===================== */
     :root {
+      /* Navy used sparingly — nav, footer, accents only */
       --navy: #1a3a5c;
-      --navy-dark: #112840;
+      --navy-dark: #0f2438;
       --navy-light: #2a5080;
-      --gold: #b8962e;
-      --gold-light: #d4af55;
-      --gold-pale: #f5e9c8;
-      --cream: #faf6ef;
+      /* Gold is now the LEAD brand color */
+      --gold: #C9A84C;
+      --gold-dark: #a8882e;
+      --gold-light: #e0c06a;
+      --gold-pale: #fdf3d8;
+      /* Warm backgrounds — no cold whites */
+      --cream: #FAF8F2;
+      --cream-mid: #F4EFE5;
       --white: #ffffff;
-      --text-dark: #1a1a2e;
-      --text-mid: #3d3d5c;
-      --text-light: #6b6b8a;
+      /* Warm text */
+      --text-dark: #1C1410;
+      --text-mid: #4a3f35;
+      --text-light: #8a7a6a;
       --silver: #c0c8d8;
-      --bg: #faf6ef;
+      --bg: #FAF8F2;
       --card-bg: #ffffff;
-      --section-alt: #f0eae0;
-      --border: rgba(184,150,46,0.2);
-      --shadow: 0 8px 40px rgba(26,58,92,0.12);
-      --shadow-gold: 0 4px 24px rgba(184,150,46,0.25);
+      --section-alt: #F0EBE0;
+      --border: rgba(201,168,76,0.22);
+      --shadow: 0 8px 40px rgba(28,20,16,0.10);
+      --shadow-gold: 0 4px 24px rgba(201,168,76,0.30);
       --font-display: 'Cormorant Garamond', serif;
       --font-script: 'Great Vibes', cursive;
       --font-body: 'Jost', sans-serif;
@@ -57,15 +63,19 @@
       --text-dark: #f0e8d5;
       --text-mid: #c8bfaf;
       --text-light: #8a9ab0;
-      --border: rgba(184,150,46,0.25);
+      --border: rgba(201,168,76,0.25);
       --shadow: 0 8px 40px rgba(0,0,0,0.35);
       --cream: #0d1f33;
+      --cream-mid: #0a1828;
     }
 
     /* ===================== BASE ===================== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
 
     body {
       font-family: var(--font-body);
@@ -76,6 +86,7 @@
       font-display: swap;
       transition: background 0.4s, color 0.4s;
       overflow-x: hidden;
+      min-height: 100vh;
     }
 
     h1, h2, h3, h4, h5 {
@@ -119,7 +130,7 @@
     }
 
     .btn-flame {
-      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
       color: #fff;
       border: none;
       padding: 0.85rem 2.2rem;
@@ -140,7 +151,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      background: linear-gradient(135deg, var(--navy-dark), var(--navy));
       opacity: 0;
       transition: opacity 0.35s;
     }
@@ -286,7 +297,6 @@
     /* ===================== HERO ===================== */
     #hero {
       min-height: 100vh;
-      background: linear-gradient(165deg, var(--navy-dark) 0%, var(--navy) 50%, var(--navy-light) 100%);
       position: relative;
       display: flex;
       align-items: center;
@@ -294,13 +304,53 @@
       padding: 120px 0 80px;
     }
 
+    /* Full-width hero background image layer */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg picture,
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* Dark overlay to keep text readable over photo */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        rgba(15, 36, 56, 0.88) 0%,
+        rgba(26, 58, 92, 0.72) 55%,
+        rgba(15, 36, 56, 0.55) 100%
+      );
+    }
+
+    /* Fallback: if no image, show navy gradient */
+    .hero-bg-fallback {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(165deg, var(--navy-dark) 0%, var(--navy) 50%, var(--navy-light) 100%);
+      z-index: -1;
+    }
+
     #hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23b8962e' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      opacity: 0.6;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A84C' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      z-index: 1;
+      pointer-events: none;
     }
+
+    #hero .container { position: relative; z-index: 2; }
 
     .hero-ornament {
       position: absolute;
@@ -432,7 +482,12 @@
 
     @keyframes gentleFloat {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-14px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero-logo-ring {
+      will-change: transform;
+      transform: translateZ(0);
     }
 
     /* ===================== PILLARS ===================== */
@@ -535,9 +590,9 @@
 
     .menu-tabs .nav-link.active,
     .menu-tabs .nav-link:hover {
-      background: var(--navy) !important;
+      background: var(--gold) !important;
       color: #fff !important;
-      border-color: var(--navy) !important;
+      border-color: var(--gold) !important;
     }
 
     [data-theme="dark"] .menu-tabs .nav-link.active {
@@ -550,43 +605,107 @@
     .menu-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      padding: 1.75rem;
+      padding: 0;
       transition: var(--transition);
       height: 100%;
       position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
 
     .menu-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-gold);
       border-color: var(--gold);
     }
 
-    .menu-card-icon {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, var(--navy), var(--navy-light));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold-light);
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
+    /* Image area */
+    .menu-card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--section-alt);
+      position: relative;
+      flex-shrink: 0;
     }
 
-    .menu-card h5 {
+    .menu-card-img picture,
+    .menu-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .menu-card:hover .menu-card-img img { transform: scale(1.06); }
+
+    /* Warm illustrated fallback when no real photo exists */
+    .menu-card-icon-fallback {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--cream-mid), var(--gold-pale));
+    }
+
+    .menu-card-icon-fallback i {
+      font-size: 2.6rem;
+      color: var(--gold);
+    }
+
+    .menu-card-icon-fallback span {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    /* Badge repositioned for image cards */
+    .menu-badge {
+      position: absolute;
+      top: 0.75rem; right: 0.75rem;
+      background: var(--gold);
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      z-index: 2;
+    }
+
+    /* Body padding inside card */
+    .menu-card-body {
+      padding: 1.4rem 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .menu-card h5,
+    .menu-card-body h5 {
       font-family: var(--font-display);
       font-size: 1.2rem;
       color: var(--navy);
       margin-bottom: 0.35rem;
     }
 
-    [data-theme="dark"] .menu-card h5 { color: var(--gold-light); }
+    [data-theme="dark"] .menu-card h5,
+    [data-theme="dark"] .menu-card-body h5 { color: var(--gold-light); }
 
-    .menu-card p {
+    .menu-card p,
+    .menu-card-body p {
       font-size: 0.85rem;
       color: var(--text-light);
       margin-bottom: 1rem;
+      flex: 1;
     }
 
     .menu-price {
@@ -849,11 +968,11 @@
 
     .choice-btn i { font-size: 1.3rem; color: var(--gold); }
     .choice-btn:hover, .choice-btn.selected {
-      background: var(--navy);
-      border-color: var(--navy);
+      background: var(--gold);
+      border-color: var(--gold);
       color: #fff;
     }
-    .choice-btn.selected i, .choice-btn:hover i { color: var(--gold-light); }
+    .choice-btn.selected i, .choice-btn:hover i { color: #fff; }
 
     [data-theme="dark"] .choice-btn { background: var(--card-bg); }
     [data-theme="dark"] .choice-btn:hover, [data-theme="dark"] .choice-btn.selected {
@@ -863,17 +982,27 @@
 
     .builder-nav {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      gap: 0.75rem;
       margin-top: 2rem;
       padding-top: 1.5rem;
       border-top: 1px solid var(--border);
     }
 
+    .builder-nav-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
     .builder-progress {
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: var(--text-light);
-      font-weight: 500;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: block;
+      text-align: center;
     }
 
     .order-summary {
@@ -1338,12 +1467,9 @@
       100% { opacity: 0; inset: -10px; }
     }
 
-    /* ===================== ENHANCEMENT 2: PARALLAX ===================== */
-    #hero { background-attachment: scroll; } /* JS handles this cross-device */
-    .parallax-layer {
-      will-change: transform;
-      transform: translateZ(0);
-    }
+    /* ===================== ENHANCEMENT 2: VIEWPORT STABILITY ===================== */
+    /* Parallax removed — logo float animation retained via CSS keyframes only */
+    .parallax-layer { will-change: auto; }
 
     /* ===================== ENHANCEMENT 3: BRUNCH HOVER-REVEAL ===================== */
     .brunch-items-preview { display: block; }
@@ -1390,21 +1516,12 @@
 
     /* ===================== ENHANCEMENT 4: STICKY BUILDER SIDEBAR ===================== */
     .builder-outer {
-      display: grid;
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
       gap: 1.5rem;
-      align-items: start;
-    }
-
-    @media (min-width: 992px) {
-      .builder-outer {
-        grid-template-columns: 1fr 280px;
-      }
     }
 
     #builderSidebar {
-      position: sticky;
-      top: 90px;
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-left: 3px solid var(--gold);
@@ -1413,17 +1530,53 @@
       transform: translateY(12px);
       transition: opacity 0.4s ease, transform 0.4s ease;
       pointer-events: none;
-      order: -1; /* mobile: show above builder */
-    }
-
-    @media (min-width: 992px) {
-      #builderSidebar { order: 0; }
     }
 
     #builderSidebar.visible {
       opacity: 1;
       transform: translateY(0);
       pointer-events: auto;
+    }
+
+    /* Sidebar display as a horizontal row of 3 on wider screens */
+    @media (min-width: 768px) {
+      #builderSidebar {
+        display: flex;
+        align-items: center;
+        gap: 0;
+      }
+      .sidebar-title {
+        flex-shrink: 0;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+        padding-right: 1.5rem;
+        border-right: 1px solid var(--border);
+        margin-right: 1.5rem;
+      }
+      .sidebar-fields {
+        display: flex;
+        flex: 1;
+        gap: 0;
+      }
+      .sidebar-row {
+        flex: 1;
+        padding: 0 1.25rem;
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+      }
+      .sidebar-row:last-of-type {
+        border-right: none;
+      }
+      .sidebar-step-hint {
+        flex-shrink: 0;
+        margin-top: 0;
+        margin-left: 1.5rem;
+        padding-left: 1.5rem;
+        border-left: 1px solid var(--border);
+        text-align: left;
+        max-width: 140px;
+      }
     }
 
     .sidebar-title {
@@ -1495,7 +1648,7 @@
   <div class="container">
     <a class="navbar-brand" href="#hero" aria-label="Whisk n Flames home">
       <picture>
-        <img src="1778199380633.jpeg" alt="Whisk n Flames Cakes and Catering logo" width="44" height="44" class="brand-logo" loading="eager" onerror="this.style.display='none'">
+        <img src="images/logo.webp" alt="Whisk n Flames Cakes and Catering logo" width="44" height="44" class="brand-logo" loading="eager" onerror="this.style.display='none'">
       </picture>
       <div class="brand-text">
         <span class="brand-name">Whisk 'n Flames</span>
@@ -1522,7 +1675,7 @@
         <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
       </ul>
       <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20place%20an%20order%20with%20Whisk%20%27n%20Flames" class="btn-flame ms-2" target="_blank" rel="noopener noreferrer" aria-label="Order now on WhatsApp">
-        <span><i class="fab fa-whatsapp me-2" aria-hidden="true"></i>Order Now</span>
+        <span><i class="fab fa-whatsapp me-2" aria-hidden="true"></i>Order on WhatsApp</span>
       </a>
     </div>
   </div>
@@ -1530,6 +1683,21 @@
 
 <!-- ============ HERO ============ -->
 <section id="hero" aria-label="Hero section">
+  <!-- Full-width hero background image — replace src with your actual hero photo -->
+  <div class="hero-bg" aria-hidden="true">
+    <picture>
+      <source srcset="images/hero-wide.webp" type="image/webp" media="(min-width: 1024px)">
+      <source srcset="images/hero-mid.webp"  type="image/webp" media="(min-width: 600px)">
+      <img src="images/hero.jpg"
+           alt=""
+           width="1920" height="1080"
+           loading="eager"
+           fetchpriority="high"
+           onerror="this.closest('.hero-bg').style.display='none'">
+    </picture>
+  </div>
+  <!-- Fallback solid color shown if image path is missing -->
+  <div class="hero-bg-fallback" aria-hidden="true"></div>
   <div class="hero-ornament hero-ornament-1" aria-hidden="true"></div>
   <div class="hero-ornament hero-ornament-2" aria-hidden="true"></div>
   <div class="hero-ornament hero-ornament-3" aria-hidden="true"></div>
@@ -1542,25 +1710,29 @@
           Est. 2023 &nbsp;·&nbsp; Saint Lucia
         </div>
         <h1>
-          <span class="hero-headline">Elegant. Creative.<br><em>Unforgettable.</em></span>
+          <span class="hero-headline mb-1">Beautiful Cakes Made for<br><em>Your Celebrations</em></span>
           <span class="hero-script">Whisk 'n Flames</span>
         </h1>
         <p class="hero-desc">
-          Custom cakes crafted to your vision. Flaming Brunch Boxes that turn any morning into a celebration. Catering that impresses from first bite to last.
+          <span class="mb-2">Beautiful custom cakes, rich black cakes, brunch boxes and catering made fresh for birthdays weddings, and celebrations across St Lucia.</span>
+          <span>Made to look beautiful, taste amazing, and make your celebration feel special.</span>
         </p>
         <div class="d-flex flex-wrap gap-3">
-          <a href="#builder" class="btn-flame" aria-label="Build your custom cake">
-            <span><i class="fas fa-cake-candles me-2" aria-hidden="true"></i>Build My Cake</span>
+          <a href="#builder" class="btn-flame" aria-label="Design your custom cake">
+            <span><i class="fas fa-cake-candles me-2" aria-hidden="true"></i>Design My Cake</span>
           </a>
-          <a href="#menu" class="text-light btn-outline-flame" aria-label="Browse our full menu">
-            <span class="text-light">Browse Menu</span>
+          <a href="#menu" class="btn-outline-flame" style="color:#fff; border-color:rgba(255,255,255,0.6);" aria-label="Browse our full menu">
+            <span style="color:#fff;">Explore the Menu</span>
           </a>
+        <p class="hero-desc m-2"><em>
+         Trusted for birthdays, weddings, brunch, surprises and special events across Saint Lucia.
+        </em></p>
         </div>
         <div class="hero-badges" role="list" aria-label="Key features">
-          <div class="hero-badge" role="listitem"><i class="fas fa-check-circle" aria-hidden="true"></i> Made Fresh to Order</div>
-          <div class="hero-badge" role="listitem"><i class="fas fa-check-circle" aria-hidden="true"></i> WhatsApp Ordering</div>
-          <div class="hero-badge" role="listitem"><i class="fas fa-check-circle" aria-hidden="true"></i> Vegan Options Available</div>
-          <div class="hero-badge" role="listitem"><i class="fas fa-check-circle" aria-hidden="true"></i> Castries &amp; Vieux-Fort Delivery</div>
+          <div class="hero-badge" role="listitem"><i class="fas fa-check-circle" aria-hidden="true"></i> Freshly Made for Your Event</div>
+          <div class="hero-badge" role="listitem"><i class="fas fa-check-circle" aria-hidden="true"></i> Easy Ordering on WhatsApp</div>
+          <div class="hero-badge" role="listitem"><i class="fas fa-check-circle" aria-hidden="true"></i> Vegan-Friendly Options Available</div>
+          <div class="hero-badge" role="listitem"><i class="fas fa-check-circle" aria-hidden="true"></i> Delivery Available in Castries &amp; Vieux-Fort</div>
         </div>
       </div>
 
@@ -1656,50 +1828,86 @@
         <div class="row g-3">
           <div class="col-sm-6 col-lg-4">
             <article class="menu-card">
-              <div class="menu-card-icon" aria-hidden="true"><i class="fas fa-birthday-cake"></i></div>
-              <h5>Birthday Cakes</h5>
-              <p>Custom-designed birthday cakes for every age and personality. Your vision, our craft.</p>
-              <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20a%20Birthday%20Cake" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order a birthday cake on WhatsApp">Order Now</a>
+              <div class="menu-card-img">
+                <picture>
+                  <img src="images/cake-birthday.jpg" alt="Custom birthday cake" loading="lazy" onerror="this.closest('.menu-card-img').innerHTML='<div class=\'menu-card-icon-fallback\'><i class=\'fas fa-birthday-cake\'></i><span>Birthday Cake</span></div>'">
+                </picture>
+              </div>
+              <div class="menu-card-body">
+                <h5>Birthday Cakes</h5>
+                <p>Custom-designed birthday cakes for every age and personality. Your vision, our craft.</p>
+                <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20a%20Birthday%20Cake" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order a birthday cake on WhatsApp">Order Now</a>
+              </div>
             </article>
           </div>
           <div class="col-sm-6 col-lg-4">
             <article class="menu-card">
-              <div class="menu-card-icon" aria-hidden="true"><i class="fas fa-ring"></i></div>
-              <h5>Wedding Cakes</h5>
-              <p>Elegant, tiered masterpieces designed to make your most special day even more memorable.</p>
-              <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20a%20Wedding%20Cake" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Enquire about wedding cakes on WhatsApp">Enquire</a>
+              <div class="menu-card-img">
+                <picture>
+                  <img src="images/cake-wedding.jpg" alt="Elegant tiered wedding cake" loading="lazy" onerror="this.closest('.menu-card-img').innerHTML='<div class=\'menu-card-icon-fallback\'><i class=\'fas fa-ring\'></i><span>Wedding Cake</span></div>'">
+                </picture>
+              </div>
+              <div class="menu-card-body">
+                <h5>Wedding Cakes</h5>
+                <p>Elegant, tiered masterpieces designed to make your most special day even more memorable.</p>
+                <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20a%20Wedding%20Cake" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Enquire about wedding cakes on WhatsApp">Enquire</a>
+              </div>
             </article>
           </div>
           <div class="col-sm-6 col-lg-4">
             <article class="menu-card">
-              <div class="menu-card-icon" aria-hidden="true"><i class="fas fa-cross"></i></div>
-              <h5>First Communion Cakes</h5>
-              <p>Beautiful, meaningful cakes to mark this sacred milestone with grace and sweetness.</p>
-              <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20a%20First%20Communion%20Cake" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order a first communion cake on WhatsApp">Order Now</a>
+              <div class="menu-card-img">
+                <picture>
+                  <img src="images/cake-communion.jpg" alt="First communion cake" loading="lazy" onerror="this.closest('.menu-card-img').innerHTML='<div class=\'menu-card-icon-fallback\'><i class=\'fas fa-cross\'></i><span>Communion Cake</span></div>'">
+                </picture>
+              </div>
+              <div class="menu-card-body">
+                <h5>First Communion Cakes</h5>
+                <p>Beautiful, meaningful cakes to mark this sacred milestone with grace and sweetness.</p>
+                <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20a%20First%20Communion%20Cake" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order a first communion cake on WhatsApp">Order Now</a>
+              </div>
             </article>
           </div>
           <div class="col-sm-6 col-lg-4">
             <article class="menu-card">
-              <div class="menu-card-icon" aria-hidden="true"><i class="fas fa-cupcake"></i></div>
-              <h5>Cupcakes</h5>
-              <p>Perfect for events, gifts, or personal treats. Available in a variety of flavours and designs.</p>
-              <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20Cupcakes" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order cupcakes on WhatsApp">Order Now</a>
+              <div class="menu-card-img">
+                <picture>
+                  <img src="images/cake-cupcakes.jpg" alt="Assorted decorated cupcakes" loading="lazy" onerror="this.closest('.menu-card-img').innerHTML='<div class=\'menu-card-icon-fallback\'><i class=\'fas fa-cake-candles\'></i><span>Cupcakes</span></div>'">
+                </picture>
+              </div>
+              <div class="menu-card-body">
+                <h5>Cupcakes</h5>
+                <p>Perfect for events, gifts, or personal treats. Available in a variety of flavours and designs.</p>
+                <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20Cupcakes" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order cupcakes on WhatsApp">Order Now</a>
+              </div>
             </article>
           </div>
           <div class="col-sm-6 col-lg-4">
             <article class="menu-card">
-              <div class="menu-card-icon" aria-hidden="true"><i class="fas fa-cheese"></i></div>
-              <h5>Cheesecakes</h5>
-              <p>Flavorful, creamy cheesecakes — our customers can't stop raving about them.</p>
-              <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20a%20Cheesecake" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order a cheesecake on WhatsApp">Order Now</a>
+              <div class="menu-card-img">
+                <picture>
+                  <img src="images/cake-cheesecake.jpg" alt="Creamy cheesecake" loading="lazy" onerror="this.closest('.menu-card-img').innerHTML='<div class=\'menu-card-icon-fallback\'><i class=\'fas fa-cheese\'></i><span>Cheesecake</span></div>'">
+                </picture>
+              </div>
+              <div class="menu-card-body">
+                <h5>Cheesecakes</h5>
+                <p>Flavorful, creamy cheesecakes — our customers can't stop raving about them.</p>
+                <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20a%20Cheesecake" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order a cheesecake on WhatsApp">Order Now</a>
+              </div>
             </article>
           </div>
           <div class="col-sm-6 col-lg-4">
             <article class="menu-card">
-              <div class="menu-card-icon" aria-hidden="true"><i class="fas fa-palette"></i></div>
-              <h5>Fondant Figurine Cakes</h5>
-              <p>Edible art. Custom fondant figurines hand-crafted to bring your cake story to life.</p>
-              <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20a%20Fondant%20Figurine%20Cake" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order a fondant figurine cake on WhatsApp">Order Now</a>
+              <div class="menu-card-img">
+                <picture>
+                  <img src="images/cake-fondant.jpg" alt="Fondant figurine cake with edible art" loading="lazy" onerror="this.closest('.menu-card-img').innerHTML='<div class=\'menu-card-icon-fallback\'><i class=\'fas fa-palette\'></i><span>Fondant Cake</span></div>'">
+                </picture>
+              </div>
+              <div class="menu-card-body">
+                <h5>Fondant Figurine Cakes</h5>
+                <p>Edible art. Custom fondant figurines hand-crafted to bring your cake story to life.</p>
+                <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20a%20Fondant%20Figurine%20Cake" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order a fondant figurine cake on WhatsApp">Order Now</a>
+              </div>
             </article>
           </div>
         </div>
@@ -1710,50 +1918,86 @@
         <div class="row g-3">
           <div class="col-sm-6 col-lg-4">
             <article class="menu-card">
-              <div class="menu-card-icon" aria-hidden="true"><i class="fas fa-mug-hot"></i></div>
-              <h5>Customized Mug Cakes</h5>
-              <p>A personal, unique gift idea. Your name, your design, your moment — baked into every bite.</p>
-              <div class="menu-price">$75</div>
+              <div class="menu-card-img">
+                <picture>
+                  <img src="images/cake-mug.jpg" alt="Customized mug cake" loading="lazy" onerror="this.closest('.menu-card-img').innerHTML='<div class=\'menu-card-icon-fallback\'><i class=\'fas fa-mug-hot\'></i><span>Mug Cake</span></div>'">
+                </picture>
+              </div>
+              <div class="menu-card-body">
+                <h5>Customized Mug Cakes</h5>
+                <p>A personal, unique gift idea. Your name, your design, your moment — baked into every bite.</p>
+                <div class="menu-price">$75</div>
+              </div>
             </article>
           </div>
           <div class="col-sm-6 col-lg-4">
             <article class="menu-card">
-              <div class="menu-card-icon" aria-hidden="true"><i class="fas fa-bread-slice"></i></div>
-              <h5>Cinnamon Rolls</h5>
-              <p>Warm, soft, and fragrant. A comfort treat that's hard to resist and impossible to forget.</p>
-              <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20Cinnamon%20Rolls" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order cinnamon rolls on WhatsApp">Order Now</a>
+              <div class="menu-card-img">
+                <picture>
+                  <img src="images/cinnamon-rolls.jpg" alt="Fresh warm cinnamon rolls" loading="lazy" onerror="this.closest('.menu-card-img').innerHTML='<div class=\'menu-card-icon-fallback\'><i class=\'fas fa-bread-slice\'></i><span>Cinnamon Rolls</span></div>'">
+                </picture>
+              </div>
+              <div class="menu-card-body">
+                <h5>Cinnamon Rolls</h5>
+                <p>Warm, soft, and fragrant. A comfort treat that's hard to resist and impossible to forget.</p>
+                <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20Cinnamon%20Rolls" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order cinnamon rolls on WhatsApp">Order Now</a>
+              </div>
             </article>
           </div>
           <div class="col-sm-6 col-lg-4">
             <article class="menu-card">
-              <div class="menu-card-icon" aria-hidden="true"><i class="fas fa-seedling"></i></div>
-              <h5>Pemmie Cornmeal Dessert</h5>
-              <p>A beloved local Saint Lucian delicacy. Rich, cultural, and made the traditional way.</p>
-              <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20Pemmie%20Cornmeal%20Dessert" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order Pemmie cornmeal dessert on WhatsApp">Order Now</a>
+              <div class="menu-card-img">
+                <picture>
+                  <img src="images/pemmie.jpg" alt="Pemmie cornmeal dessert" loading="lazy" onerror="this.closest('.menu-card-img').innerHTML='<div class=\'menu-card-icon-fallback\'><i class=\'fas fa-seedling\'></i><span>Pemmie</span></div>'">
+                </picture>
+              </div>
+              <div class="menu-card-body">
+                <h5>Pemmie Cornmeal Dessert</h5>
+                <p>A beloved local Saint Lucian delicacy. Rich, cultural, and made the traditional way.</p>
+                <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20Pemmie%20Cornmeal%20Dessert" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order Pemmie cornmeal dessert on WhatsApp">Order Now</a>
+              </div>
             </article>
           </div>
           <div class="col-sm-6 col-lg-4">
             <article class="menu-card">
-              <div class="menu-card-icon" aria-hidden="true"><i class="fas fa-wheat-awn"></i></div>
-              <h5>Plantain Bread</h5>
-              <p>Caribbean soul in every slice. A flavourful, moist bread that's uniquely Whisk 'n Flames.</p>
-              <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20Plantain%20Bread" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order plantain bread on WhatsApp">Order Now</a>
+              <div class="menu-card-img">
+                <picture>
+                  <img src="images/plantain-bread.jpg" alt="Moist plantain bread" loading="lazy" onerror="this.closest('.menu-card-img').innerHTML='<div class=\'menu-card-icon-fallback\'><i class=\'fas fa-wheat-awn\'></i><span>Plantain Bread</span></div>'">
+                </picture>
+              </div>
+              <div class="menu-card-body">
+                <h5>Plantain Bread</h5>
+                <p>Caribbean soul in every slice. A flavourful, moist bread that's uniquely Whisk 'n Flames.</p>
+                <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20Plantain%20Bread" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order plantain bread on WhatsApp">Order Now</a>
+              </div>
             </article>
           </div>
           <div class="col-sm-6 col-lg-4">
             <article class="menu-card">
-              <div class="menu-card-icon" aria-hidden="true"><i class="fas fa-cookie"></i></div>
-              <h5>Mini Tray Cakes</h5>
-              <p>A variety of flavours in one tray — diet and vegan friendly options available.</p>
-              <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20Mini%20Tray%20Cakes" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order mini tray cakes on WhatsApp">Order Now</a>
+              <div class="menu-card-img">
+                <picture>
+                  <img src="images/tray-cakes.jpg" alt="Assorted mini tray cakes" loading="lazy" onerror="this.closest('.menu-card-img').innerHTML='<div class=\'menu-card-icon-fallback\'><i class=\'fas fa-cookie\'></i><span>Tray Cakes</span></div>'">
+                </picture>
+              </div>
+              <div class="menu-card-body">
+                <h5>Mini Tray Cakes</h5>
+                <p>A variety of flavours in one tray — diet and vegan friendly options available.</p>
+                <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20Mini%20Tray%20Cakes" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order mini tray cakes on WhatsApp">Order Now</a>
+              </div>
             </article>
           </div>
           <div class="col-sm-6 col-lg-4">
             <article class="menu-card">
-              <div class="menu-card-icon" aria-hidden="true"><i class="fas fa-circle-half-stroke"></i></div>
-              <h5>Chocolate Marble Cake</h5>
-              <p>The best of both worlds — rich chocolate swirled through classic vanilla in every slice.</p>
-              <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20a%20Chocolate%20Marble%20Cake" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order a chocolate marble cake on WhatsApp">Order Now</a>
+              <div class="menu-card-img">
+                <picture>
+                  <img src="images/cake-marble.jpg" alt="Chocolate marble cake slice" loading="lazy" onerror="this.closest('.menu-card-img').innerHTML='<div class=\'menu-card-icon-fallback\'><i class=\'fas fa-circle-half-stroke\'></i><span>Marble Cake</span></div>'">
+                </picture>
+              </div>
+              <div class="menu-card-body">
+                <h5>Chocolate Marble Cake</h5>
+                <p>The best of both worlds — rich chocolate swirled through classic vanilla in every slice.</p>
+                <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20a%20Chocolate%20Marble%20Cake" class="btn-outline-flame" style="font-size:0.75rem; padding:0.5rem 1.2rem;" target="_blank" rel="noopener noreferrer" aria-label="Order a chocolate marble cake on WhatsApp">Order Now</a>
+              </div>
             </article>
           </div>
         </div>
@@ -1763,39 +2007,46 @@
       <div class="tab-pane fade" id="blackcake-pane" role="tabpanel" aria-labelledby="blackcake-tab">
         <div class="row justify-content-center">
           <div class="col-lg-8">
-            <div class="menu-card text-center mb-4">
-              <span class="section-label" style="margin-bottom:0.5rem;">Available Year Round</span>
-              <h3 class="section-title mb-2">Decadent Black Cake</h3>
-              <p style="max-width:500px; margin:0 auto 2rem; color:var(--text-light);">
-                Our signature Heavy Black Cake — moist, rich, and deeply flavoured. Soaked to perfection and available year-round. Add walnuts or go extra boozy.
-              </p>
-              <div class="row g-3 justify-content-center mb-3">
-                <div class="col-4">
-                  <div class="stat-block">
-                    <div class="stat-number">$75</div>
-                    <div class="stat-label">6 inch</div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="stat-block">
-                    <div class="stat-number">$110</div>
-                    <div class="stat-label">8 inch</div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="stat-block">
-                    <div class="stat-number">$175</div>
-                    <div class="stat-label">10 inch</div>
-                  </div>
-                </div>
+            <div class="menu-card mb-4">
+              <div class="menu-card-img" style="aspect-ratio: 16/7;">
+                <picture>
+                  <img src="images/cake-black.jpg" alt="Rich moist black cake" loading="lazy" onerror="this.closest('.menu-card-img').innerHTML='<div class=\'menu-card-icon-fallback\'><i class=\'fas fa-wine-glass\'></i><span>Black Cake</span></div>'">
+                </picture>
               </div>
-              <div class="d-flex justify-content-center gap-3 flex-wrap mb-3">
-                <span class="brunch-serves"><i class="fas fa-plus" aria-hidden="true"></i> Walnuts — $5 extra</span>
-                <span class="brunch-serves"><i class="fas fa-wine-glass" aria-hidden="true"></i> Extra Boozy — $5 extra</span>
+              <div class="menu-card-body text-center">
+                <span class="section-label" style="margin-bottom:0.5rem;">Available Year Round</span>
+                <h3 class="section-title mb-2">Decadent Black Cake</h3>
+                <p style="max-width:500px; margin:0 auto 2rem; color:var(--text-light);">
+                  Our signature Heavy Black Cake — moist, rich, and deeply flavoured. Soaked to perfection and available year-round. Add walnuts or go extra boozy.
+                </p>
+                <div class="row g-3 justify-content-center mb-3">
+                  <div class="col-4">
+                    <div class="stat-block">
+                      <div class="stat-number">$75</div>
+                      <div class="stat-label">6 inch</div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="stat-block">
+                      <div class="stat-number">$110</div>
+                      <div class="stat-label">8 inch</div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="stat-block">
+                      <div class="stat-number">$175</div>
+                      <div class="stat-label">10 inch</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-center gap-3 flex-wrap mb-3">
+                  <span class="brunch-serves"><i class="fas fa-plus" aria-hidden="true"></i> Walnuts — $5 extra</span>
+                  <span class="brunch-serves"><i class="fas fa-wine-glass" aria-hidden="true"></i> Extra Boozy — $5 extra</span>
+                </div>
+                <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20a%20Black%20Cake" class="btn-flame" target="_blank" rel="noopener noreferrer" aria-label="Order a black cake on WhatsApp">
+                  <span><i class="fab fa-whatsapp me-2" aria-hidden="true"></i>Order My Black Cake</span>
+                </a>
               </div>
-              <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20order%20a%20Black%20Cake" class="btn-flame" target="_blank" rel="noopener noreferrer" aria-label="Order a black cake on WhatsApp">
-                <span><i class="fab fa-whatsapp me-2" aria-hidden="true"></i>Order My Black Cake</span>
-              </a>
             </div>
           </div>
         </div>
@@ -1814,7 +2065,9 @@
         Brunch Box
       </h2>
       <div class="divider-gold"></div>
-      <p class="text-muted mx-auto" style="max-width:540px; font-size:0.95rem;">A feast in a box. Regular and Vegan options available in four sizes — perfect for solo indulgence or a full-on celebration.</p>
+      <p class="text-muted mx-auto" style="max-width:540px; font-size:0.95rem;">A warm, indulgent breakfast-style box designed for surprise mornings, birthdays, or treating someone special.<br>
+      Perfect for giftting, celebrations, or slow weekend mornings that feel like a moment.<br>
+      Great for couples, friends, and surprise deliveries</p>
     </div>
 
     <div class="row g-4">
@@ -2119,10 +2372,13 @@
             </button>
           </div>
           <div class="builder-nav">
-            <span class="builder-progress">Step 1 of 4</span>
-            <button class="btn-flame" id="next1" type="button" disabled aria-label="Proceed to step 2">
-              <span>Next: Choose Size <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i></span>
-            </button>
+            <span class="builder-progress">Step 1 of 4 — Choose Your Occasion</span>
+            <div class="builder-nav-row">
+              <span></span>
+              <button class="btn-flame" id="next1" type="button" disabled aria-label="Proceed to step 2">
+                <span>Next: Choose Size <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i></span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -2151,11 +2407,11 @@
             </button>
           </div>
           <div class="builder-nav">
-            <button class="btn-outline-flame" id="back2" type="button" aria-label="Go back to step 1">
-              <i class="fas fa-arrow-left me-1" aria-hidden="true"></i> Back
-            </button>
-            <div class="d-flex align-items-center gap-3">
-              <span class="builder-progress">Step 2 of 4</span>
+            <span class="builder-progress">Step 2 of 4 — Choose Your Cake Size</span>
+            <div class="builder-nav-row">
+              <button class="btn-outline-flame" id="back2" type="button" aria-label="Go back to step 1">
+                <i class="fas fa-arrow-left me-1" aria-hidden="true"></i> Back
+              </button>
               <button class="btn-flame" id="next2" type="button" disabled aria-label="Proceed to step 3">
                 <span>Next: Pick Flavour <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i></span>
               </button>
@@ -2194,11 +2450,11 @@
             </button>
           </div>
           <div class="builder-nav">
-            <button class="btn-outline-flame" id="back3" type="button" aria-label="Go back to step 2">
-              <i class="fas fa-arrow-left me-1" aria-hidden="true"></i> Back
-            </button>
-            <div class="d-flex align-items-center gap-3">
-              <span class="builder-progress">Step 3 of 4</span>
+            <span class="builder-progress">Step 3 of 4 — Choose Your Flavour</span>
+            <div class="builder-nav-row">
+              <button class="btn-outline-flame" id="back3" type="button" aria-label="Go back to step 2">
+                <i class="fas fa-arrow-left me-1" aria-hidden="true"></i> Back
+              </button>
               <button class="btn-flame" id="next3" type="button" disabled aria-label="Proceed to step 4">
                 <span>Next: Review & Send <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i></span>
               </button>
@@ -2209,7 +2465,7 @@
         <!-- Step 4: Review -->
         <div class="builder-panel" id="panel-4" role="tabpanel" aria-labelledby="ind-4">
           <h4>Almost there — your cake summary</h4>
-          <p class="panel-sub">Review your order details before sending to WhatsApp.</p>
+          <p class="panel-sub">Review your selections and fill in your details before sending.</p>
 
           <div class="order-summary" aria-label="Order summary">
             <h5>Your Cake Order</h5>
@@ -2227,17 +2483,39 @@
             </div>
           </div>
 
+          <!-- Customer Details -->
+          <div style="margin-bottom:1.25rem;">
+            <label for="custName" style="font-size:0.82rem; font-weight:600; color:var(--text-mid); display:block; margin-bottom:0.4rem; letter-spacing:0.05em; text-transform:uppercase;">
+              Your Name <span style="color:var(--gold);">*</span>
+            </label>
+            <input type="text" id="custName" class="builder-textarea" style="min-height:unset; height:44px; resize:none;" placeholder="e.g. Sarah Johnson" aria-label="Your full name" autocomplete="name">
+          </div>
+
+          <div style="margin-bottom:1.25rem;">
+            <label for="custPhone" style="font-size:0.82rem; font-weight:600; color:var(--text-mid); display:block; margin-bottom:0.4rem; letter-spacing:0.05em; text-transform:uppercase;">
+              Phone Number <span style="color:var(--gold);">*</span>
+            </label>
+            <input type="tel" id="custPhone" class="builder-textarea" style="min-height:unset; height:44px; resize:none;" placeholder="e.g. (758) 123-4567" aria-label="Your phone number" autocomplete="tel">
+          </div>
+
+          <div style="margin-bottom:1.25rem;">
+            <label for="custAddress" style="font-size:0.82rem; font-weight:600; color:var(--text-mid); display:block; margin-bottom:0.4rem; letter-spacing:0.05em; text-transform:uppercase;">
+              Delivery Address
+            </label>
+            <input type="text" id="custAddress" class="builder-textarea" style="min-height:unset; height:44px; resize:none;" placeholder="e.g. 12 Micoud Street, Castries (or Pickup)" aria-label="Your delivery address" autocomplete="street-address">
+          </div>
+
           <label for="cakeNotes" style="font-size:0.82rem; font-weight:600; color:var(--text-mid); display:block; margin-bottom:0.5rem; letter-spacing:0.05em; text-transform:uppercase;">
             Special message, design details or dietary requirements (optional)
           </label>
           <textarea id="cakeNotes" class="builder-textarea" placeholder="e.g. Write 'Happy 30th Sarah' on the cake, fondant flowers in pink and white, nut-free please..." aria-label="Special cake notes"></textarea>
 
           <div class="builder-nav">
-            <button class="btn-outline-flame" id="back4" type="button" aria-label="Go back to step 3">
-              <i class="fas fa-arrow-left me-1" aria-hidden="true"></i> Back
-            </button>
-            <div class="d-flex align-items-center gap-3">
-              <span class="builder-progress">Step 4 of 4</span>
+            <span class="builder-progress">Step 4 of 4 — Review & Send Your Order</span>
+            <div class="builder-nav-row">
+              <button class="btn-outline-flame" id="back4" type="button" aria-label="Go back to step 3">
+                <i class="fas fa-arrow-left me-1" aria-hidden="true"></i> Back
+              </button>
               <a id="sendOrder" href="#" class="btn-flame" target="_blank" rel="noopener noreferrer" aria-label="Send cake order on WhatsApp">
                 <span><i class="fab fa-whatsapp me-2" aria-hidden="true"></i>Send My Order</span>
               </a>
@@ -2248,24 +2526,26 @@
       </div><!-- /builder-body -->
     </div><!-- /builder-wrap -->
 
-      <!-- Sticky Draft Order Sidebar -->
+      <!-- Draft Order Sidebar (below builder) -->
       <aside id="builderSidebar" aria-label="Draft cake order summary" aria-live="polite">
         <div class="sidebar-title">
           <i class="fas fa-receipt" aria-hidden="true"></i> Draft Order
         </div>
-        <div class="sidebar-row">
-          <span class="sidebar-label">Occasion</span>
-          <span class="sidebar-val empty" id="sb-occasion">Not selected yet</span>
+        <div class="sidebar-fields">
+          <div class="sidebar-row">
+            <span class="sidebar-label">Occasion</span>
+            <span class="sidebar-val empty" id="sb-occasion">Not selected yet</span>
+          </div>
+          <div class="sidebar-row">
+            <span class="sidebar-label">Size</span>
+            <span class="sidebar-val empty" id="sb-size">Not selected yet</span>
+          </div>
+          <div class="sidebar-row">
+            <span class="sidebar-label">Flavour</span>
+            <span class="sidebar-val empty" id="sb-flavour">Not selected yet</span>
+          </div>
+          <p class="sidebar-step-hint" id="sb-hint">Choose an occasion to begin</p>
         </div>
-        <div class="sidebar-row">
-          <span class="sidebar-label">Size</span>
-          <span class="sidebar-val empty" id="sb-size">Not selected yet</span>
-        </div>
-        <div class="sidebar-row">
-          <span class="sidebar-label">Flavour</span>
-          <span class="sidebar-val empty" id="sb-flavour">Not selected yet</span>
-        </div>
-        <p class="sidebar-step-hint" id="sb-hint">Choose an occasion to begin</p>
       </aside>
     </div><!-- /builder-outer -->
   </div>
@@ -2326,10 +2606,10 @@
 <section id="reviews" aria-labelledby="reviews-heading">
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
-      <span class="section-label">Customer Love</span>
+      <span class="section-label">Made for Celebrations People Remember</span>
       <h2 class="section-title" id="reviews-heading">
-        <span class="script d-block" style="font-size:1.3em; color:var(--gold);">Real People,</span>
-        Real Reactions
+        <span class="script d-block" style="font-size:1.3em; color:var(--gold);">Celebrations We've Been Part Of</span>
+        Real reviews from customers across St Lucia
       </h2>
       <div class="divider-gold"></div>
     </div>
@@ -2407,10 +2687,10 @@
 
       <div class="col-md-6 col-lg-4 d-flex align-items-center justify-content-center" data-aos="fade-up" data-aos-delay="500">
         <div class="text-center p-4">
-          <div class="script" style="font-size:3rem; color:var(--gold); line-height:1; margin-bottom:0.5rem;" aria-hidden="true">Your story</div>
+          <div class="script" style="font-size:3rem; color:var(--gold); line-height:1; margin-bottom:0.5rem;" aria-hidden="true">Your special story</div>
           <p style="font-size:0.9rem; color:var(--text-light); margin-bottom:1.25rem;">Could be next. Order today and experience the Whisk 'n Flames difference.</p>
           <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20place%20an%20order" class="btn-flame" target="_blank" rel="noopener noreferrer" aria-label="Place your order on WhatsApp">
-            <span>Place My Order</span>
+            <span>Order on WhatsApp</span>
           </a>
         </div>
       </div>
@@ -2583,17 +2863,19 @@
 <section id="cta-section" aria-label="Call to action">
   <div class="container position-relative" style="z-index:1;">
     <div class="text-center" data-aos="fade-up">
-      <span class="cta-script">Ready to order?</span>
+      <span class="cta-script">Ready to Make Your Celebration Extra Special?</span>
       <h2 class="cta-headline">Every Great Celebration<br>Starts With Great Food.</h2>
-      <p class="cta-desc">Whether it's a single cupcake or a full catering spread — we show up with flavour, elegance, and heart.</p>
+      <p class="cta-desc">Whether it's a birthday, wedding, brunch surprise, or intimate gathering, we're here to create something fresh, beautiful, and memorable for your event.</p>
       <div class="d-flex justify-content-center flex-wrap gap-3">
         <a href="https://wa.me/17587128537?text=Hi%2C%20I%27d%20like%20to%20place%20an%20order%20with%20Whisk%20%27n%20Flames" class="btn-flame" target="_blank" rel="noopener noreferrer" aria-label="Order now on WhatsApp">
           <span><i class="fab fa-whatsapp me-2" aria-hidden="true"></i>Order on WhatsApp</span>
         </a>
-        <a href="#builder" class="btn-outline-flame" style="border-color:rgba(184,150,46,0.5); color:#fff;" aria-label="Build your custom cake">
-          <span>Build My Cake</span>
+        <a href="#builder" class="btn-outline-flame" style="border-color:rgba(184,150,46,0.5); color:#fff;" aria-label="Design your custom cake">
+          <span>Design My Cake</span>
         </a>
       </div>
+        <p class="cta-desc">Fast responses - Custom orders welcome - Delivery Available</p><br>
+        <em class="cta-desc m-1">Weekend and holiday dates book quickly</em>
     </div>
   </div>
 </section>
@@ -2695,41 +2977,11 @@
     applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
   });
 
-  // ── ENHANCEMENT 2: JS Parallax (cross-device safe) ──
-  const heroSection = document.getElementById('hero');
-  const ctaSection  = document.getElementById('cta-section');
-
-  function handleParallax() {
-    const scrollY = window.scrollY;
-
-    if (heroSection) {
-      const rate = scrollY * 0.35;
-      heroSection.style.backgroundPositionY = `calc(50% + ${rate}px)`;
-      const logoRing = heroSection.querySelector('.hero-logo-ring');
-      if (logoRing) logoRing.style.transform = `translateY(${scrollY * 0.08}px)`;
-    }
-
-    if (ctaSection) {
-      const rect = ctaSection.getBoundingClientRect();
-      const rate = (window.innerHeight - rect.top) * 0.12;
-      ctaSection.style.backgroundPositionY = `calc(50% + ${rate}px)`;
-    }
-  }
-
-  // Only run on non-reduced-motion and non-iOS (iOS has fixed-bg issues)
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-  if (!prefersReduced && !isIOS) {
-    window.addEventListener('scroll', handleParallax, { passive: true });
-  }
-
   // ── ENHANCEMENT 3: Brunch Box mobile expand toggle ──
   document.querySelectorAll('.brunch-expand-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const full   = btn.nextElementSibling; // .brunch-items-full
+      const full   = btn.nextElementSibling;
       const isOpen = full.classList.contains('open');
-
       full.classList.toggle('open', !isOpen);
       btn.setAttribute('aria-expanded', String(!isOpen));
       btn.innerHTML = isOpen
@@ -2741,7 +2993,6 @@
   // ── Cake Builder ──
   const state = { occasion: '', size: '', flavour: '' };
 
-  // Sidebar elements
   const sidebar   = document.getElementById('builderSidebar');
   const sbOcc     = document.getElementById('sb-occasion');
   const sbSize    = document.getElementById('sb-size');
@@ -2763,7 +3014,6 @@
         el.textContent = val;
         el.classList.remove('empty');
         el.classList.add('filled');
-        // Remove animation class after it plays to allow re-trigger
         el.addEventListener('animationend', () => el.classList.remove('filled'), { once: true });
       } else {
         el.textContent = 'Not selected yet';
@@ -2778,6 +3028,15 @@
     if (sbHint) sbHint.textContent = hintMap[step] || '';
   }
 
+  // FIX 3: Scroll to top of builder on every step change
+  function scrollToBuilder() {
+    const builderSection = document.getElementById('builder');
+    if (!builderSection) return;
+    const offset = 80; // account for sticky navbar height
+    const top = builderSection.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+
   function showPanel(n) {
     document.querySelectorAll('.builder-panel').forEach((p, i) => {
       p.classList.toggle('active', i + 1 === n);
@@ -2788,44 +3047,31 @@
       if (i + 1 === n) el.classList.add('active');
       el.setAttribute('aria-selected', i + 1 === n ? 'true' : 'false');
     });
+    scrollToBuilder();
     updateSidebar(n);
     if (n === 4) updateSummary();
   }
 
-  // ── ENHANCEMENT 1: Micro-interaction on choice buttons ──
+  // ENHANCEMENT 1: Micro-interaction on choice buttons
   document.querySelectorAll('.choice-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const field = btn.dataset.field;
 
-      // Deselect siblings
       document.querySelectorAll(`[data-field="${field}"]`).forEach(b => {
         b.classList.remove('selected', 'pop');
         b.setAttribute('aria-pressed', 'false');
       });
 
-      // Select + pop animation
       btn.classList.add('selected');
       btn.setAttribute('aria-pressed', 'true');
-
-      // Force reflow so animation re-triggers on re-select
       void btn.offsetWidth;
       btn.classList.add('pop');
 
       state[field] = btn.dataset.val;
 
-      // Enable next buttons & update sidebar
-      if (field === 'occasion') {
-        document.getElementById('next1').disabled = false;
-        updateSidebar(1);
-      }
-      if (field === 'size') {
-        document.getElementById('next2').disabled = false;
-        updateSidebar(2);
-      }
-      if (field === 'flavour') {
-        document.getElementById('next3').disabled = false;
-        updateSidebar(3);
-      }
+      if (field === 'occasion') { document.getElementById('next1').disabled = false; updateSidebar(1); }
+      if (field === 'size')     { document.getElementById('next2').disabled = false; updateSidebar(2); }
+      if (field === 'flavour')  { document.getElementById('next3').disabled = false; updateSidebar(3); }
     });
   });
 
@@ -2843,24 +3089,42 @@
     buildWhatsAppLink();
   }
 
+  // FIX 4: WhatsApp message includes customer name, phone, address + site URL
   function buildWhatsAppLink() {
-    const notes = document.getElementById('cakeNotes').value.trim();
-    const msg = [
+    const notes   = document.getElementById('cakeNotes')?.value.trim()   || '';
+    const name    = document.getElementById('custName')?.value.trim()    || '';
+    const phone   = document.getElementById('custPhone')?.value.trim()   || '';
+    const address = document.getElementById('custAddress')?.value.trim() || '';
+
+    const lines = [
       '🎂 *Custom Cake Order — Whisk \'n Flames*',
       '',
       `*Occasion:* ${state.occasion}`,
       `*Size:* ${state.size}`,
       `*Flavour:* ${state.flavour}`,
-      notes ? `*Special Notes:* ${notes}` : '',
-      '',
-      'Please confirm pricing and availability. Thank you!'
-    ].filter(l => l !== undefined).join('\n');
+    ];
 
+    if (notes)   lines.push(`*Special Notes:* ${notes}`);
+    lines.push('');
+    lines.push('*— Customer Details —*');
+    if (name)    lines.push(`*Name:* ${name}`);
+    if (phone)   lines.push(`*Phone:* ${phone}`);
+    if (address) lines.push(`*Address:* ${address}`);
+    lines.push('');
+    lines.push('Please confirm pricing and availability. Thank you!');
+    lines.push('');
+    lines.push('📎 _Ordered via: whisknflames.com_');
+
+    const msg = lines.join('\n');
     document.getElementById('sendOrder').href =
       `https://wa.me/17587128537?text=${encodeURIComponent(msg)}`;
   }
 
-  document.getElementById('cakeNotes').addEventListener('input', buildWhatsAppLink);
+  // Rebuild WhatsApp link whenever any field changes
+  ['cakeNotes', 'custName', 'custPhone', 'custAddress'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', buildWhatsAppLink);
+  });
 </script>
 
 </body>
