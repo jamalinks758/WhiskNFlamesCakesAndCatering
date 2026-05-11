@@ -492,7 +492,7 @@
 
     /* ===================== PILLARS ===================== */
     #pillars {
-      background: var(--navy);
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
       padding: 60px 0;
     }
 
@@ -501,7 +501,7 @@
       align-items: center;
       justify-content: center;
       gap: 1rem;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255,255,255,0.92);
       font-size: 0.8rem;
       font-weight: 500;
       letter-spacing: 0.12em;
@@ -509,12 +509,12 @@
       padding: 1rem 0;
     }
 
-    .pillar-item i { color: var(--gold-light); font-size: 1.1rem; }
+    .pillar-item i { color: #fff; font-size: 1.1rem; }
 
     .pillar-divider {
       width: 1px;
       height: 30px;
-      background: rgba(184,150,46,0.3);
+      background: rgba(255,255,255,0.3);
       margin: auto;
     }
 
@@ -745,14 +745,14 @@
     }
 
     .brunch-tier-header {
-      background: var(--navy);
+      background: linear-gradient(135deg, #3a2010, #5a3520);
       padding: 1.5rem;
       text-align: center;
       position: relative;
     }
 
     .brunch-tier.featured .brunch-tier-header {
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
     }
 
     .brunch-tier-name {
@@ -837,7 +837,7 @@
     }
 
     .builder-header {
-      background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
       padding: 2.5rem;
       text-align: center;
       position: relative;
@@ -849,7 +849,7 @@
       bottom: 0; left: 50%;
       transform: translateX(-50%);
       width: 60px; height: 2px;
-      background: var(--gold);
+      background: rgba(255,255,255,0.4);
     }
 
     .builder-header h2 {
@@ -916,7 +916,7 @@
     }
 
     .builder-step-indicator.done .step-num {
-      background: var(--navy);
+      background: var(--gold-dark);
       color: #fff;
     }
 
@@ -1050,37 +1050,41 @@
     .builder-textarea:focus { border-color: var(--gold); }
 
     /* ===================== CATERING ===================== */
-    #catering { background: var(--navy); }
+    #catering { background: var(--section-alt); }
 
     .catering-card {
-      border: 1px solid rgba(184,150,46,0.2);
+      border: 1px solid var(--border);
+      background: var(--card-bg);
       padding: 2rem;
       transition: var(--transition);
       height: 100%;
     }
 
     .catering-card:hover {
-      background: rgba(184,150,46,0.06);
+      background: var(--gold-pale);
       border-color: var(--gold);
       transform: translateY(-4px);
+      box-shadow: var(--shadow-gold);
     }
 
     .catering-card i {
       font-size: 2rem;
-      color: var(--gold-light);
+      color: var(--gold);
       margin-bottom: 1rem;
       display: block;
     }
 
     .catering-card h5 {
       font-family: var(--font-display);
-      color: #fff;
+      color: var(--navy);
       font-size: 1.3rem;
       margin-bottom: 0.5rem;
     }
 
+    [data-theme="dark"] .catering-card h5 { color: var(--gold-light); }
+
     .catering-card p {
-      color: rgba(255,255,255,0.6);
+      color: var(--text-mid);
       font-size: 0.88rem;
     }
 
@@ -2555,13 +2559,13 @@
 <section id="catering" aria-labelledby="catering-heading">
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
-      <span class="section-label" style="color:var(--gold-light);">Full Service</span>
-      <h2 class="section-title" id="catering-heading" style="color:#fff;">
-        <span class="script d-block" style="font-size:1.3em; color:var(--gold-light);">Catering</span>
+      <span class="section-label">Full Service</span>
+      <h2 class="section-title" id="catering-heading">
+        <span class="script d-block" style="font-size:1.3em; color:var(--gold);">Catering</span>
         That Impresses
       </h2>
       <div class="divider-gold"></div>
-      <p style="max-width:520px; margin:0 auto; font-size:0.95rem; color:rgba(255,255,255,0.6);">
+      <p style="max-width:520px; margin:0 auto; font-size:0.95rem; color:var(--text-mid);">
         From intimate gatherings to large events — we bring the flavour, the presentation, and the experience.
       </p>
     </div>
@@ -2591,7 +2595,7 @@
     </div>
 
     <div class="text-center" data-aos="fade-up">
-      <p style="color:rgba(255,255,255,0.55); font-size:0.85rem; margin-bottom:1.5rem;">
+      <p style="color:var(--text-light); font-size:0.85rem; margin-bottom:1.5rem;">
         <i class="fas fa-info-circle me-1" aria-hidden="true"></i>
         Catering minimum: 6 food items per order. Contact us to discuss your event requirements.
       </p>
